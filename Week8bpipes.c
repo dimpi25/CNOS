@@ -33,9 +33,6 @@ int main() {
 
         close(fd[0]); // Close read end
     }
-    else {
-        printf("Fork failed!\n");
-    }
 
     return 0;
 }
