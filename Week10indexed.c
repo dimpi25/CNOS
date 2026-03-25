@@ -4,7 +4,8 @@ int main()
 {
 int n, size, i; 
 int free_blocks[100];
-for(i=0;i<100;i++) free_blocks[i]=0; 
+for(i=0;i<100;i++) 
+free_blocks[i]=0; 
 
 printf("Enter number of files: ");
 scanf("%d",&n);
@@ -17,7 +18,11 @@ int j;
 
 for(j=0;j<100;j++)
 {
-if(free_blocks[j]==0) { index_block=j; free_blocks[j]=1; break; }
+if(free_blocks[j]==0) {
+index_block=j;
+free_blocks[j]=1; '
+break; 
+}
 }
 if(index_block==-1) { 
 printf("No free block for index\n"); 
