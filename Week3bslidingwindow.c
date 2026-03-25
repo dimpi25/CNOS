@@ -43,25 +43,26 @@ int main() {
             if (((float)rand() / RAND_MAX) < loss_prob) {
                 printf(" -> Frame %d LOST!\n", i);
                 retransmits++;
-                printf(" -> Retransmitting from frame %d...\n", base);
+                printf(" -> Retransmitting from frame %d...\n", i);
                 sleep(timeout_sec);
+                i=base-1;
                 break;  // Go-Back-N: restart from base
             }
         }
-
-        // If all frames in window sent successfully
-        if (i == base + w || i >= f) {
-            printf("ACK received up to frame %d\n\n", i - 1);
-            base = i;
-        }
+            printf("ACK received up to frame %d\n\n",base+w-1);
+            base+= w;
+        if (base>=f)
+            break;
+        
     }
 
-    float efficiency = ((float)f * 100.0) / total_sent;
+    float efficiency = (f * 100.0) / total_sent;
 
     printf("=== Simulation Complete ===\n");
+    printf("Frames delivered:%d\n",f);
     printf("Total transmissions: %d\n", total_sent);
-    printf("Retransmissions: %d\n", retransmits);
-    printf("Efficiency: %.2f%%\n", efficiency);
+    printf("Retransmits triggered: %d\n", retransmits);
+    printf("Efficiency: %.1f%%\n", efficiency);
 
     return 0;
 }
